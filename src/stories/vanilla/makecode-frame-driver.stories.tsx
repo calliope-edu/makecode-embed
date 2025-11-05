@@ -40,7 +40,7 @@ const renderEditor = (args: StoryArgs) => {
     const iframe = document.createElement('iframe');
     iframe.allow = 'usb; autoplay; camera; microphone;';
     iframe.src = createMakeCodeURL(
-      'https://makecode.microbit.org',
+      'https://makecode.calliope.cc',
       args.options?.version === 'default' ? undefined : args.options?.version,
       args.options?.lang,
       args.options?.controller ?? 1,

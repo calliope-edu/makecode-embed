@@ -68,7 +68,7 @@ export interface MakeCodeFrameProps
 const MakeCodeFrame = forwardRef<MakeCodeFrameDriver, MakeCodeFrameProps>(
   function MakeCode(props, ref) {
     const {
-      baseUrl = 'https://makecode.microbit.org',
+      baseUrl = 'https://makecode.calliope.cc',
       version,
       lang,
       controller,

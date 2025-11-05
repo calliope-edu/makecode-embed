@@ -40,7 +40,7 @@ import {
 const iframe = document.createElement("iframe");
 iframe.allow = "usb; autoplay; camera; microphone;";
 iframe.src = createMakeCodeURL(
-  "https://makecode.microbit.org",
+  "https://makecode.calliope.cc",
   undefined, // Version.
   undefined, // Language.
   1, // Controller.

@@ -87,7 +87,7 @@ export const createMakeCodeRenderBlocks = (
   const defaultedOptions: MakeCodeRenderBlocksOptions = {
     ...options,
   };
-  const makecodeOrigin = options.baseUrl ?? 'https://makecode.microbit.org';
+  const makecodeOrigin = options.baseUrl ?? 'https://makecode.calliope.cc';
 
   let iframe: HTMLIFrameElement | undefined;
   let status: MakeCodeState = 'loading';
