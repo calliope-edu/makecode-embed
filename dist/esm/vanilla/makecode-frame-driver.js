@@ -628,7 +628,7 @@ export class MakeCodeFrameDriver {
     }
 }
 export const createMakeCodeURL = (baseUrl, version, lang, controller, queryParams) => {
-    const url = new URL(baseUrl + (version ? `/${encodeURIComponent(version)}` : ''));
+    const url = new URL((baseUrl ?? 'https://makecode.calliope.cc') + (version ? `/${encodeURIComponent(version)}` : ''));
     if (lang) {
         url.searchParams.set('lang', lang);
     }

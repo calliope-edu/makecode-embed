@@ -823,7 +823,7 @@ export const createMakeCodeURL = (
   queryParams: Record<string, string> | undefined
 ): string => {
   const url = new URL(
-    baseUrl + (version ? `/${encodeURIComponent(version)}` : '')
+    (baseUrl ?? 'https://makecode.calliope.cc') + (version ? `/${encodeURIComponent(version)}` : '')
   );
   if (lang) {
     url.searchParams.set('lang', lang);
