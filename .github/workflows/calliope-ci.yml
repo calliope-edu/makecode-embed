@@ -1,0 +1,41 @@
+# Calliope's check for this fork: lint, build and the Storybook build on every
+# pull request to and push on calliope-main. Upstream's build (npm publish,
+# Pages artifact) and build-docs (GitHub Pages) stay on upstream's branches;
+# the fork publishes nothing, the apps pin it by commit and use the committed
+# dist/ directory.
+name: calliope-ci
+
+on:
+  pull_request:
+    branches: [calliope-main]
+  push:
+    branches: [calliope-main]
+  workflow_dispatch:
+
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: npm
+      - run: npm ci
+      # lint, build and build:storybook.
+      - run: npm run ci
+      # The apps install this fork from git and use dist/ as committed, so it
+      # has to match src/. dist/*/package.json is left out: the npm script
+      # writes it with `echo`, which drops the quotes on Linux.
+      - name: Committed dist/ is up to date
+        run: |
+          git status --porcelain -- dist ':!dist/*/package.json'
+          git diff --exit-code -- dist ':!dist/*/package.json'
+          test -z "$(git status --porcelain -- dist ':!dist/*/package.json')"
